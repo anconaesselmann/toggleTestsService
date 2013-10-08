@@ -29,17 +29,18 @@ or vice versa, the service will create and open the corresponding directory.
 
 Usage Example:
 	All your source code files originate from the folder
-		/Users/userName/WebServer/framework/
+		/Users/name/WebServer/fw/
 	All your test files originate from the folder
-		/Users/userName/WebServer/frameworkTest/
+		/Users/name/WebServer/fwTest/
 
 	If you create a source code file named:
-		/Users/userName/WebServer/framework/fw_library/db/wrapper/MySQL.php
+		/Users/name/WebServer/fw/fw_library/db/wrapper/MySQL.php
 	the corresponding test file will be:
-		/Users/userName/WebServer/frameworkTest/fw_library/db/wrapper/MySQLTest.php
+		/Users/name/WebServer/fwTest/fw_library/db/wrapper/MySQLTest.php
 
 	Now in the folder
-	/Users/userName/WebServer/framework/fw_library/db/wrapper
-	you can hit [control+t], and the finder window will navigate to /Users/userName/WebServer/frameworkTest/fw_library/db/wrapper.
+	/Users/name/WebServer/fw/fw_library/db/wrapper
+	you can hit [control+t], and the finder window will navigate to
+	/Users/userName/WebServer/fwTest/fw_library/db/wrapper.
 	If you hit [control+t] again, you will go back to the original folder.
 
