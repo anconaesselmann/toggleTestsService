@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>339.2</string>
+	<string>381</string>
 	<key>AMApplicationVersion</key>
-	<string>2.2.4</string>
+	<string>2.4</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -25,7 +25,7 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.0.1</string>
+				<string>1.0.2</string>
 				<key>AMApplication</key>
 				<array>
 					<string>Automator</string>
@@ -51,12 +51,12 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run	tell application "Finder" to set windowTarget to the target of the front Finder window as alias	set posixPath to POSIX path of windowTarget	set phpString to "$dir =trim(\"" &amp; posixPath &amp; "\");$newDir = preg_replace(\"/Test/\", \"\", $dir);if ($dir != $newDir) {	if (!file_exists($newDir)) {		mkdir($newDir, 0777, true);	}	echo $newDir;} else {	$dirParts = explode(\"/\", $dir);	for ($i=0; $i &lt; count($dirParts); $i++) { 		$tempDir = \"\";		for ($j=1; $j &lt;= $i; $j++) { 			$tempDir .= \"/\".$dirParts[$j];		}		$tempDir .= \"Test\";		if (file_exists($tempDir)) {			$dirParts[$i] = $dirParts[$i].\"Test\";			$newDir = implode(\"/\", $dirParts);			if (!file_exists($newDir)) {			    mkdir($newDir, 0777, true);			}			echo $newDir;			exit;		}	}	echo -1;}	"	set commandString to "php -r '" &amp; phpString &amp; "'"	set phpResult to do shell script commandString	#display dialog phpResult	if (phpResult is "-1") then		display dialog "No Test Folder found."	else		tell application "Finder"			set the target of the front Finder window to (POSIX file phpResult)		end tell	end ifend run</string>
+					<string>on run 	tell application "Finder" to set windowTarget to the target of the front Finder window as alias	set posixPath to POSIX path of windowTarget	set phpString to "$dir =trim(\"" &amp; posixPath &amp; "\");// Test if Test folder that has Class folder$dirParts = explode(\"/\", $dir);for ($i=count($dirParts) - 1; $i &gt;=0 ; $i--) {	$pattern = \"/(Test)$/\";	$subject = $dirParts[$i];	$matchResult = (bool)preg_match($pattern, $subject);		//echo \"Pattern: \".$pattern.\", subject: \".$subject.\", matchResult: \".$matchResult.\"\\n...\";	if ($matchResult) {		$dirParts[$i] = substr($dirParts[$i], 0, strlen($dirParts[$i]) - 4);		break;	}}$newDir = implode(\"/\", $dirParts);if ($dir != $newDir) {	if (!file_exists($newDir)) {		//mkdir($newDir, 0777, true);		// this replaces file creation		echo -2;		exit;	}	echo $newDir;} else {	// test if Class folder and has Test folder		$dirParts = explode(\"/\", $dir);	for ($i=count($dirParts) - 1; $i &gt;=0 ; $i--) { 		$tempDir = \"\";		for ($j=1; $j &lt;= $i; $j++) { 			$tempDir .= \"/\".$dirParts[$j];		}		$tempDir .= \"Test\";		if (file_exists($tempDir)) {			$dirParts[$i] = $dirParts[$i].\"Test\";			$newDir = implode(\"/\", $dirParts);			if (!file_exists($newDir)) {			    //mkdir($newDir, 0777, true);				// this replaces file creation				echo -1;				exit;			}			echo $newDir;			exit;		}	}	echo -1;}	"		set phpStringIsTest to "$dir =trim(\"" &amp; posixPath &amp; "\");$dirParts = explode(\"/\", $dir);for ($i=count($dirParts) - 1; $i &gt;=0 ; $i--) {	$pattern = \"/(Test)$/\";	$subject = $dirParts[$i];	$matchResult = (bool)preg_match($pattern, $subject);	if ($matchResult) {		$dirParts[$i] = substr($dirParts[$i], 0, strlen($dirParts[$i]) - 4);		break;	}}$newDir = implode(\"/\", $dirParts);if ($dir != $newDir) {	echo 1;} else {	echo 0;}	"		set commandString to "php -r '" &amp; phpString &amp; "'"	set phpResult to do shell script commandString	#display dialog phpResult	if (phpResult is "-1") then		display notification "No Test Folder found." with title "Toggling" 		delay 1		#display dialog "No Test Folder found."	else if (phpResult is "-2") then		display notification "Only test folder found." with title "Toggling" 		delay 1		#display dialog "Only test folder found."	else		tell application "Finder"			set the target of the front Finder window to (POSIX file phpResult)		end tell				set commandString to "php -r '" &amp; phpStringIsTest &amp; "'"		set phpResult to do shell script commandString				if (phpResult is "1") then			display notification "Now displaying Classes" with title "Toggling" 			delay 1 		else			display notification "Now displaying Tests" with title "Toggling" 			delay 1		end if 	end ifend run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
 				<key>CFBundleVersion</key>
-				<string>1.0.1</string>
+				<string>1.0.2</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
@@ -105,7 +105,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>367.500000:614.000000</string>
+				<string>309.500000:498.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
