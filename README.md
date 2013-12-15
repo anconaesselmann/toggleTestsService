@@ -2,7 +2,7 @@
 ####A Service for Mac OSX to toggle between Test code directory tree and Source code directory tree.
 
 ##Requirements:  
-- Mac OSX (tested only on Lion)  
+- Mac OSX (tested only on Mavericks)  
 - PHP (tested only on 5.5)  
 - command line tools (install through x-code)
 
